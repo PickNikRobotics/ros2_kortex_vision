@@ -75,4 +75,4 @@ private:
   bool use_gst_timestamps_;
   bool is_first_initialize_;
 };
-}
+}  // namespace ros_kortex_vision
