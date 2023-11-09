@@ -70,8 +70,3 @@ repos:
         args:
           - "-c"
           - "markdown-link-check-config.json"
-
-  - repo: https://github.com/hadolint/hadolint
-    rev: v2.12.0
-    hooks:
-      - id: hadolint-docker
