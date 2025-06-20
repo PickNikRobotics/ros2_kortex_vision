@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.14)
 
 project(kinova_vision)
 
+add_compile_options(-Werror)
+
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 17)
 endif()
