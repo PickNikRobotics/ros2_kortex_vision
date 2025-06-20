@@ -269,10 +269,24 @@ bool Vision::start()
           RCLCPP_ERROR(node_->get_logger(), "[%s]: Failed to start stream", camera_name_.c_str());
           return false;
 
+        case GST_STATE_CHANGE_NO_PREROLL:
+          RCLCPP_INFO(node_->get_logger(), "[%s]: Stream started (no preroll)", camera_name_.c_str());
+          break;
+
         case GST_STATE_CHANGE_ASYNC:
           RCLCPP_ERROR(node_->get_logger(), "[%s]: Failed to start stream (timeout)", camera_name_.c_str());
           return false;
+
+        case GST_STATE_CHANGE_SUCCESS:
+          RCLCPP_INFO(node_->get_logger(), "[%s]: Stream started (async)", camera_name_.c_str());
+          break;
+
+        default:
+          RCLCPP_ERROR(node_->get_logger(), "[%s]: Unknown state change result", camera_name_.c_str());
+          return false;
       }
+
+      break;
     }
 
     case GST_STATE_CHANGE_SUCCESS:
@@ -380,7 +394,7 @@ bool Vision::publish()
   // Update header information
   auto cur_cinfo = camera_info_manager_->getCameraInfo();
 
-  if (cur_cinfo.height != image_height_ || cur_cinfo.width != image_width_)
+  if (static_cast<int>(cur_cinfo.height) != image_height_ || static_cast<int>(cur_cinfo.width) != image_width_)
   {
     RCLCPP_WARN_ONCE(node_->get_logger(),
                      "[%s]: Calibration file sensor resolution (%dx%d pixels) doesn't match stream resolution (%dx%d "
