@@ -13,6 +13,10 @@
   <depend>libgstreamer1.0-dev</depend>
   <depend>libgstreamer-plugins-base1.0-dev</depend>
 
+  <exec_depend>gstreamer1.0-plugins-base</exec_depend>
+  <exec_depend>gstreamer1.0-plugins-good</exec_depend>
+  <exec_depend>gstreamer1.0-libav</exec_depend>
+
   <depend>camera_calibration_parsers</depend>
   <depend>camera_info_manager</depend>
   <depend>cv_bridge</depend>
